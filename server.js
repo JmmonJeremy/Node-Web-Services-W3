@@ -8,6 +8,9 @@ const port = process.env.PORT || 3000;
 app
 .use(bodyParser.json())
 .use((req, res, next) => {
+  if (req.method === "POST" || req.method === "PUT") {
+    res.setHeader('Content-Type', 'application/json');
+  }
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 })
