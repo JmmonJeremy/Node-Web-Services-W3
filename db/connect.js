@@ -14,14 +14,18 @@ const initDb = (callback) => {
   console.log('MongoDB URI:', process.env.MONGODB_URI);
 
   MongoClient.connect(process.env.MONGODB_URI)
-    .then((client) => {      
+    .then((client) => {
       _db = client;
       callback(null, _db);
       // List all databases
-      _db.db().admin().listDatabases().then((response) => {
-        const databases = response.databases
-        console.log('Databases from MongoClient connection:', databases);
-      });      
+      _db
+        .db()
+        .admin()
+        .listDatabases()
+        .then((response) => {
+          const databases = response.databases;
+          console.log('Databases from MongoClient connection:', databases);
+        });
     })
     .catch((err) => {
       callback(err);
@@ -37,5 +41,5 @@ const getDb = () => {
 
 module.exports = {
   initDb,
-  getDb,
+  getDb
 };
